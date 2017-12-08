@@ -37,6 +37,7 @@ public class MyApplication extends Application {
     private void setUpRealmConfig(){
 
         Realm.init(getApplicationContext());
+
         RealmConfiguration config = new RealmConfiguration
                 .Builder()
                 .deleteRealmIfMigrationNeeded()
