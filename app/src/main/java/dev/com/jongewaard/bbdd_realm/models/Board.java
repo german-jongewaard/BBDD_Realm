@@ -2,6 +2,7 @@ package dev.com.jongewaard.bbdd_realm.models;
 
 import java.util.Date;
 
+import dev.com.jongewaard.bbdd_realm.app.MyApplication;
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -25,7 +26,8 @@ public class Board extends RealmObject{
     public Board(){}
 
     public Board(String title){
-        this.id = 0;
+        //la primera vez que se llame no sera un ID Cer0, sera un Id uno
+        this.id = MyApplication.BoardID.incrementAndGet();
         this.title = title;
         this.createAt = new Date();
         this.notes = new RealmList<Note>();

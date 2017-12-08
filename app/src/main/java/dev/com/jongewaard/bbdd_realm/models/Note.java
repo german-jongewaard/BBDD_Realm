@@ -2,6 +2,7 @@ package dev.com.jongewaard.bbdd_realm.models;
 
 import java.util.Date;
 
+import dev.com.jongewaard.bbdd_realm.app.MyApplication;
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -24,7 +25,7 @@ public class Note extends RealmObject {
     public Note(){}
 
     public Note(String description){
-        this.id = 0;
+        this.id = MyApplication.NoteID.incrementAndGet();
         this.description = description;
         this.createAt = new Date(); //Cada vez que creo una instancia, le paso la fecha del
                                     // mismo segundo en que se crea
