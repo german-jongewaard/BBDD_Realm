@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import dev.com.jongewaard.bbdd_realm.models.Board;
 import dev.com.jongewaard.bbdd_realm.models.Note;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
 
@@ -30,10 +31,26 @@ public class MyApplication extends Application {
         BoardID = getIdByTable(realm, Board.class); //recojo los datos
         NoteID = getIdByTable(realm, Note.class); //recojo los datos
         realm.close();//cierro la base de datos
-
-
-
     }
+
+    /* Configuracion de la BBDD Realm, aqui me creo un metodo*/
+    private void setUpRealmConfig(){
+
+        Realm.init(getApplicationContext());
+        RealmConfiguration config = new RealmConfiguration
+                .Builder()
+                .deleteRealmIfMigrationNeeded()
+                .build();
+
+
+        Realm.setDefaultConfiguration(config);
+    }
+
+
+
+
+
+
 
     //metodo que hago privado para utilizarlo solo aquí. Este metodo va a trabajar con clases
     // genericas, no sabemos cual es y a la T la extendemos a Realm
