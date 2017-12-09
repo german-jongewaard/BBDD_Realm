@@ -22,6 +22,9 @@ public class BoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_board);
 
         fab = (FloatingActionButton) findViewById(R.id.fabAddBoard);
+
+        //para ejecutar la Alerta llamo al metodo showAlertForCreatingBoard AQUI!!!
+        showAlertForCreatingBoard("title", "message");
     }
 
     //elemento usado en MaterialDesign
@@ -49,6 +52,10 @@ public class BoardActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "The name is required to create a new Board", Toast.LENGTH_SHORT).show();
             }
         });
+        //aqui lo crea y lo enseña! (a la alerta)
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
 
 
 
