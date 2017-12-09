@@ -32,7 +32,13 @@ public class BoardActivity extends AppCompatActivity {
         fab = (FloatingActionButton) findViewById(R.id.fabAddBoard);
 
         //para ejecutar la Alerta llamo al metodo showAlertForCreatingBoard AQUI!!!
-        showAlertForCreatingBoard("title", "message");
+        //showAlertForCreatingBoard("title", "message");
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAlertForCreatingBoard("Add New Board", "Type a name for your new board");
+            }
+        });
     }
 
 
