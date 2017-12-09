@@ -11,15 +11,23 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import dev.com.jongewaard.bbdd_realm.R;
+import dev.com.jongewaard.bbdd_realm.models.Board;
+import io.realm.Realm;
 
 public class BoardActivity extends AppCompatActivity {
 
+    private Realm realm;
+
     private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
+
+        // DbRealm
+        realm = Realm.getDefaultInstance();
 
         fab = (FloatingActionButton) findViewById(R.id.fabAddBoard);
 
@@ -27,6 +35,22 @@ public class BoardActivity extends AppCompatActivity {
         showAlertForCreatingBoard("title", "message");
     }
 
+
+    //** CRUD Actions **/ Seccion 7 Clase 80
+    private void createNewBoard(final String boardName) {
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                Board board = new Board(boardName);
+                realm.copyToRealm(board);
+            }
+        });
+
+    }
+
+
+    //** Dioalogs **/
     //elemento usado en MaterialDesign
     private void showAlertForCreatingBoard(String title, String message){
         //creo una instancia del Builder, es un Pop-pup que va a tener un Input
@@ -61,7 +85,5 @@ public class BoardActivity extends AppCompatActivity {
 
     }
 
-    private void createNewBoard(String boardName) {
 
-    }
 }

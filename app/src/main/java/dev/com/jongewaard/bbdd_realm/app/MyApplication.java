@@ -27,6 +27,7 @@ public class MyApplication extends Application {
 
         /* Voy a leer de la base de datos cual es el Máximo por cada tabla, cual es el maximo
         valor Id que tenemos. Si la BBDD esta blanca (vacia) vamos a tener un ID Cero! */
+        Realm.init(this);
         Realm realm = Realm.getDefaultInstance(); //asumo que la BBDD esta configurada
         BoardID = getIdByTable(realm, Board.class); //recojo los datos
         NoteID = getIdByTable(realm, Note.class); //recojo los datos
@@ -36,7 +37,7 @@ public class MyApplication extends Application {
     /* Configuracion de la BBDD Realm, aqui me creo un metodo*/
     private void setUpRealmConfig(){
 
-        Realm.init(getApplicationContext());
+         Realm.init(getApplicationContext());
 
         RealmConfiguration config = new RealmConfiguration
                 .Builder()
