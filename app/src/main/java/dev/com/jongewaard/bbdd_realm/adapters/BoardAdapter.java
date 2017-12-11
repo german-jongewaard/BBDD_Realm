@@ -61,8 +61,22 @@ public class BoardAdapter extends BaseAdapter {
             vh.createdAt = (TextView) convertView.findViewById(R.id.textViewBoardDate);
             //dentro del convertView paso el ViewHolder como un Tag
             convertView.setTag(vh);
-
+        }else {
+            //lo casteo a ViewHolder porque estoy seguro que el convertView es un VH y
+            // no hace falta hacer un tr catch
+            vh = (ViewHolder) convertView.getTag();
         }
+
+        Board board = list.get(position); //lo cargo con los datos de nuestro modelo
+        vh.title.setText(board.getTitle());
+
+        int numberOfNotes = board.getNotes().size();
+        String textForNotes = (numberOfNotes == 1) ? numberOfNotes + " Note" : numberOfNotes + " Notes";
+        vh.notes.setText(textForNotes);
+
+
+        vh.createdAt.setText(board.getCreateAt().toString());//cojo la fecha y la paso a String
+
 
 
 
