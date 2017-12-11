@@ -4,10 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 import dev.com.jongewaard.bbdd_realm.models.Board;
+import dev.com.jongewaard.bbdd_realm.models.Note;
 
 /**
  * Created by german on 11-12-17.
@@ -26,24 +30,36 @@ public class BoardAdapter extends BaseAdapter {
     }
 
 
-
     @Override
     public int getCount() {
-        return 0;
+        return list.size();
     }
 
     @Override
-    public Object getItem(int position) {
-        return null;
+    public Board getItem(int position) {
+        return list.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
-        return 0;
+    public long getItemId(int id) {
+        return id;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+
+
+
+
+
+
         return null;
+    }
+
+
+    public class ViewHolder {
+        TextView title;
+        TextView notes;
+        TextView createdAt;
     }
 }
