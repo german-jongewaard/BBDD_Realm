@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import dev.com.jongewaard.bbdd_realm.R;
@@ -75,14 +77,12 @@ public class BoardAdapter extends BaseAdapter {
         String textForNotes = (numberOfNotes == 1) ? numberOfNotes + " Note" : numberOfNotes + " Notes";
         vh.notes.setText(textForNotes);
 
+        //formateo de la fecha!
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String createdAt = df.format(board.getCreateAt());
+        vh.createdAt.setText(createdAt);//cojo la fecha y la paso a String
 
-        vh.createdAt.setText(board.getCreateAt().toString());//cojo la fecha y la paso a String
-
-
-
-
-
-        return null;
+        return convertView;
     }
 
 

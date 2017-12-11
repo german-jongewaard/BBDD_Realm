@@ -8,17 +8,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import dev.com.jongewaard.bbdd_realm.R;
+import dev.com.jongewaard.bbdd_realm.adapters.BoardAdapter;
 import dev.com.jongewaard.bbdd_realm.models.Board;
+import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
+import io.realm.RealmResults;
 
-public class BoardActivity extends AppCompatActivity {
+public class BoardActivity extends AppCompatActivity implements RealmChangeListener<Board>{
 
     private Realm realm;
 
     private FloatingActionButton fab;
+
+    private ListView listView; //Luego de crear el BoardAdapter...
+    private BoardAdapter adapter;
+    private RealmResults<Board> boards;
 
 
     @Override
@@ -28,6 +37,15 @@ public class BoardActivity extends AppCompatActivity {
 
         // DbRealm
         realm = Realm.getDefaultInstance();
+        boards = realm.where(Board.class).findAll();
+        boards.addChangeListener((OrderedRealmCollectionChangeListener<RealmResults<Board>>) this);
+
+
+
+
+        adapter = new BoardAdapter(this, boards, R.layout.list_view_board_item);
+        listView = (ListView) findViewById(R.id.listViewBoard);
+        listView.setAdapter(adapter);
 
         fab = (FloatingActionButton) findViewById(R.id.fabAddBoard);
 
@@ -36,7 +54,7 @@ public class BoardActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlertForCreatingBoard("Add New Board", "Type a name for your new board");
+                showAlertForCreatingBoard("Aa listadd New Board", "Type a name for your new board");
             }
         });
     }
@@ -91,5 +109,12 @@ public class BoardActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    public void onChange(Board board) {
+        /* Esto es para refrescar el adaptado, cada vez que se lanza el evento el cual
+        conlleva un cambio en la lista del resultado, refresca el adaptador  */
+        adapter.notifyDataSetChanged();
+    }
 
 }
