@@ -31,9 +31,13 @@
             android:text="TextView" />
 
     </LinearLayout>
+
     <TextView
         android:id="@+id/textViewBoardDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textSize="10dp"
+        android:textStyle="italic"
         android:text="TextView" />
 </LinearLayout>
