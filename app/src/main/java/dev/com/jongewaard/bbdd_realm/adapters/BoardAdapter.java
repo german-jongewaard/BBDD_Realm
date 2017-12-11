@@ -70,7 +70,8 @@ public class BoardAdapter extends BaseAdapter {
         Board board = list.get(position); //lo cargo con los datos de nuestro modelo
         vh.title.setText(board.getTitle());
 
-        int numberOfNotes = board.getNotes().size();
+        int numberOfNotes = board.getNotes().size();//numero de notas que voy a meter (agarro el numero)
+        //si el numero de notas es igual a uno, pongo en singular, sino en plural
         String textForNotes = (numberOfNotes == 1) ? numberOfNotes + " Note" : numberOfNotes + " Notes";
         vh.notes.setText(textForNotes);
 
