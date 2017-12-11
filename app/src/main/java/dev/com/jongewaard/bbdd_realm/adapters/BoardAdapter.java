@@ -1,8 +1,13 @@
 package dev.com.jongewaard.bbdd_realm.adapters;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import java.util.List;
+
+import dev.com.jongewaard.bbdd_realm.models.Board;
 
 /**
  * Created by german on 11-12-17.
@@ -10,9 +15,15 @@ import android.widget.BaseAdapter;
 
 public class BoardAdapter extends BaseAdapter {
 
+    private Context context;
+    private List<Board> list;
+    private int layout;
 
-
-
+    public BoardAdapter(Context context, List<Board> boards, int layout){
+        this.context = context;
+        this.list = boards;
+        this.layout = layout;
+    }
 
 
 
