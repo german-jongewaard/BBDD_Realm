@@ -1,6 +1,7 @@
 package dev.com.jongewaard.bbdd_realm.adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,6 +11,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+import dev.com.jongewaard.bbdd_realm.R;
 import dev.com.jongewaard.bbdd_realm.models.Board;
 import dev.com.jongewaard.bbdd_realm.models.Note;
 
@@ -48,7 +50,19 @@ public class BoardAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
+        ViewHolder vh;
 
+        if(convertView == null) {
+            //inflo la vista con el layout que nos pasan del constructor
+            convertView = LayoutInflater.from(context).inflate(layout,null);
+            vh = new ViewHolder();
+            vh.title = (TextView) convertView.findViewById(R.id.textViewBoardTitle);
+            vh.notes = (TextView) convertView.findViewById(R.id.textViewBoardNotes);
+            vh.createdAt = (TextView) convertView.findViewById(R.id.textViewBoardDate);
+            //dentro del convertView paso el ViewHolder como un Tag
+            convertView.setTag(vh);
+
+        }
 
 
 
