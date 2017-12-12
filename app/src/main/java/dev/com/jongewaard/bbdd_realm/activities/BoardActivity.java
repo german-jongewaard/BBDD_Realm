@@ -1,12 +1,14 @@
 package dev.com.jongewaard.bbdd_realm.activities;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,7 +21,7 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
 
-public class BoardActivity extends AppCompatActivity implements RealmChangeListener<Board>{
+public class BoardActivity extends AppCompatActivity implements RealmChangeListener<Board>, AdapterView.OnItemClickListener{
 
     private Realm realm;
 
@@ -109,7 +111,6 @@ public class BoardActivity extends AppCompatActivity implements RealmChangeListe
 
     }
 
-
     @Override
     public void onChange(Board board) {
         /* Esto es para refrescar el adaptado, cada vez que se lanza el evento el cual
@@ -117,4 +118,12 @@ public class BoardActivity extends AppCompatActivity implements RealmChangeListe
         adapter.notifyDataSetChanged();
     }
 
+    /* Luego de implementar en la clase el: AdapterView.OnItemClickListener. genero el onItemClick
+     * para que sea usado para el ListView que tenemos*/
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(BoardActivity.this, NoteActivity.class);
+        intent.putExtra("id", boards.get(position).getId());//aquí le paso el Id
+        startActivity(intent);
+    }
 }
