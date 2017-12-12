@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -174,11 +175,25 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater()
-
+        getMenuInflater().inflate(R.menu.menu_note_activity, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case    R.id.delete_all_notes:
+                deleteAll();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
 
     @Override
     public void onChange(Board board) {
