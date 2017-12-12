@@ -6,6 +6,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -160,7 +161,7 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
                 else if(boardName.equals(board.getTitle()))
                     Toast.makeText(getApplicationContext(), "The name is the same than is was before", Toast.LENGTH_LONG).show();
                 else
-                    editBoard(boardName, board); //aqui edita
+                  //  editBoard(boardName, board); //aqui edita
 
 
             }
@@ -171,6 +172,13 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
     }
 
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater()
+
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     public void onChange(Board board) {
