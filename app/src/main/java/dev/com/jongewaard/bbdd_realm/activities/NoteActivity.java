@@ -18,6 +18,7 @@ import dev.com.jongewaard.bbdd_realm.models.Board;
 import dev.com.jongewaard.bbdd_realm.models.Note;
 import io.realm.OrderedRealmCollectionChangeListener;
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class NoteActivity extends AppCompatActivity {
@@ -28,33 +29,41 @@ public class NoteActivity extends AppCompatActivity {
 
     private ListView listView; //Luego de crear el NoteAdapter...
     private NoteAdapter adapter;
-    private RealmResults<Note> notes;
+    private RealmList<Note> notes;
+
+    private int boardId;
+    private Board board;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
 
-
         // DbRealm
         realm = Realm.getDefaultInstance();
-        notes = realm.where(Note.class).findAll();
-        notes.addChangeListener((OrderedRealmCollectionChangeListener<RealmResults<Note>>) this);
 
+        if(getIntent().getExtras() != null) boardId = getIntent().getExtras().getInt("id");
 
-        adapter = new NoteAdapter(this, notes, R.layout.list_view_note_item);
-        listView = (ListView) findViewById(R.id.listViewNote);
-        listView.setAdapter(adapter);
+        board = realm.where(Board.class).equalTo("id", boardId).findFirst();
+        notes = board.getNotes();
+
+        this.setTitle(board.getTitle());
 
         fab = (FloatingActionButton) findViewById(R.id.fabAddNote);
+        listView = (ListView) findViewById(R.id.listViewNote);
+
+        adapter=new NoteAdapter(this, notes, R.layout.list_view_note_item);
+
+        listView.setAdapter(adapter);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAlertForCreatingNote("Aa listadd New Note", "Type a name for your new note");
+                showAlertForCreatingNote("Aa listadd New Board", "Type a name for your new board");
             }
         });
-    }
+
+     }
 
     //** Dioalogs **/
     //elemento usado en MaterialDesign
