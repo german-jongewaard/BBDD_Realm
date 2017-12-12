@@ -134,6 +134,42 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
         dialog.show();
     }
 
+    /* Aqui muestro mensaje de la EDICION */
+    private void showAlertForEditingNote(String title, String message, final Board board){
+        //creo una instancia del Builder, es un Pop-pup que va a tener un Input
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        if(title != null) builder.setTitle(title);
+        if(message != null) builder.setMessage(message);
+
+        //inflo la vista
+        View viewInflated = LayoutInflater.from(this).inflate(R.layout.dialog_create_board, null);
+        builder.setView(viewInflated);//le paso la lista para que la embeba
+
+        final EditText input = (EditText) viewInflated.findViewById(R.id.editTextNewBoard);
+        input.setText(board.getTitle()); // cuando voy a editar muestra el texto de lo que quiero editar
+
+
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //trim() es para borrar los espacios al final, por si el usuario los dejara
+                String boardName = input.getText().toString().trim();
+                if(boardName.length() == 0)
+                    Toast.makeText(getApplicationContext(), "The name is required to create a new Board", Toast.LENGTH_LONG).show();
+                else if(boardName.equals(board.getTitle()))
+                    Toast.makeText(getApplicationContext(), "The name is the same than is was before", Toast.LENGTH_LONG).show();
+                else
+                    editBoard(boardName, board); //aqui edita
+
+
+            }
+        });
+        //aqui lo crea y lo enseña! (a la alerta)
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
 
     @Override
