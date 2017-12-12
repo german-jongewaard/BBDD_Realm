@@ -67,23 +67,13 @@ public class NoteAdapter extends BaseAdapter {
 
         //aqui cojo el objeto con el que voy a trabajar, el objeto trabaja en toda nuestra lista
         Note notes = list.get(position); //lo cargo con los datos de nuestro modelo
+
         vh.descripcion.setText(notes.getDescription());
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy"); //aqui le doy formato a la fecha!
         String date = df.format(notes.getCreateAt());
         vh.createdAt.setText(date);/* como aqui el formato no es adecuado, tengo que transformarlo
                                     y  hacer el paso de arriba*/
-
-
-        int numberOfNotes = notes.getId();//numero de notas que voy a meter (agarro el numero)
-        //si el numero de notas es igual a uno, pongo en singular, sino en plural
-        String textForNotes = (numberOfNotes == 1) ? numberOfNotes + " Note" : numberOfNotes + " Notes";
-        vh.notes.setText(textForNotes);
-
-        //formateo de la fecha!
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String createdAt = df.format(board.getCreateAt());
-        vh.createdAt.setText(createdAt);//cojo la fecha y la paso a String
 
         return convertView;
     }

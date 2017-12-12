@@ -105,10 +105,6 @@ public class BoardActivity extends AppCompatActivity implements RealmChangeListe
         //aqui lo crea y lo enseña! (a la alerta)
         AlertDialog dialog = builder.create();
         dialog.show();
-
-
-
-
     }
 
     @Override
