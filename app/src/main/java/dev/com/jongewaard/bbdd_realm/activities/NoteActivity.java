@@ -57,7 +57,6 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
 
         fab = (FloatingActionButton) findViewById(R.id.fabAddNote);
         listView = (ListView) findViewById(R.id.listViewNote);
-
         adapter=new NoteAdapter(this, notes, R.layout.list_view_note_item);
 
         listView.setAdapter(adapter);
@@ -68,6 +67,8 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
                 showAlertForCreatingNote("Add new Note", "Type a note for " + board.getTitle() + ".");
             }
         });
+
+        registerForContextMenu(listView);
      }
 
             /* CRUD Actions */
@@ -76,7 +77,6 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
     private void createNewNote(final String note) {
 
         realm.beginTransaction();//empieza
-
         Note _note  = new Note(note);
         realm.copyToRealm(_note);//esta linea guarda la nota en la BBDD
         board.getNotes().add(_note);//aqui añado a la pizarra la nota que he creado
@@ -100,7 +100,7 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
 
     private void deleteAll(){
         realm.beginTransaction();
-        board.getNotes().deleteFromRealm(boardId);
+        board.getNotes().deleteAllFromRealm();
         realm.commitTransaction();
     }
 
