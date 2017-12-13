@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -201,11 +202,20 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo  info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo(); //aqui tengo la información ya..
 
         switch (item.getItemId()) {
 
-            case: R.id.delete_all_notes:
+            case R.id.delete_note:
 
+                deleteNote(notes.get(info.position));
+
+                return true;
+
+            case R.id.edit_note:
+
+                showAlertForEditingNote("Edit Note", "Change the name of the note", notes.get(info.position));
+                return true;
             default:
                 return super.onContextItemSelected(item);
         }
