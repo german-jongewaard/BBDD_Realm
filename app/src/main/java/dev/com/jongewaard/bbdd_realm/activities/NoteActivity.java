@@ -159,7 +159,7 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
                 String noteDescription = input.getText().toString().trim();
                 if(noteDescription.length() == 0)
                     Toast.makeText(getApplicationContext(), "The text for the note is required to be edited", Toast.LENGTH_LONG).show();
-                else if(noteDescription.equals(board.getTitle()))
+                else if(noteDescription.equals(note.getDescription()))
                     Toast.makeText(getApplicationContext(), "The note is the same than is was before", Toast.LENGTH_LONG).show();
                 else
                    editNote(noteDescription, note); //aqui edita
@@ -192,11 +192,12 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        getMenuInflater().inflate(R.menu.menu_note_activity, menu);
+        getMenuInflater().inflate(R.menu.context_menu_note_activity, menu);
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+
         AdapterView.AdapterContextMenuInfo  info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo(); //aqui tengo la información ya..
 
         switch (item.getItemId()) {
