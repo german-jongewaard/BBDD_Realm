@@ -100,7 +100,6 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
 
     private void deleteAll(){
         realm.beginTransaction();
-
         board.getNotes().deleteFromRealm(boardId);
         realm.commitTransaction();
     }
@@ -129,7 +128,6 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
                 String note = input.getText().toString().trim();
                 if(note.length() > 0)
                     createNewNote(note);
-
                 else
                     Toast.makeText(getApplicationContext(), "The note can't be empty", Toast.LENGTH_LONG).show();
             }
@@ -154,7 +152,6 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
         final EditText input = (EditText) viewInflated.findViewById(R.id.editTextNewNote);
         input.setText(note.getDescription()); // cuando voy a editar muestra el texto de lo que quiero editar
 
-
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -166,8 +163,6 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
                     Toast.makeText(getApplicationContext(), "The note is the same than is was before", Toast.LENGTH_LONG).show();
                 else
                    editNote(noteDescription, note); //aqui edita
-
-
             }
         });
         //aqui lo crea y lo enseña! (a la alerta)
@@ -200,21 +195,15 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
         getMenuInflater().inflate(R.menu.menu_note_activity, menu);
     }
 
-
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         AdapterView.AdapterContextMenuInfo  info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo(); //aqui tengo la información ya..
 
         switch (item.getItemId()) {
-
             case R.id.delete_note:
-
                 deleteNote(notes.get(info.position));
-
                 return true;
-
             case R.id.edit_note:
-
                 showAlertForEditingNote("Edit Note", "Change the name of the note", notes.get(info.position));
                 return true;
             default:

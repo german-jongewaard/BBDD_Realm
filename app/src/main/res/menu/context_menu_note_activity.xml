@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/edit_note"
-        android:title="Edit Name" />
+        android:title="Edit Nota" />
 
     <item android:id="@+id/delete_note"
         android:title="Delete" />
