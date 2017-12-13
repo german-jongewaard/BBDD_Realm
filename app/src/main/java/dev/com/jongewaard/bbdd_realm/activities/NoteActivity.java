@@ -139,7 +139,7 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
     }
 
     /* Aqui muestro mensaje de la EDICION */
-    private void showAlertForEditingNote(String title, String message, final Board board){
+    private void showAlertForEditingNote(String title, String message, final Note note){
         //creo una instancia del Builder, es un Pop-pup que va a tener un Input
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -147,24 +147,24 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
         if(message != null) builder.setMessage(message);
 
         //inflo la vista
-        View viewInflated = LayoutInflater.from(this).inflate(R.layout.dialog_create_board, null);
+        View viewInflated = LayoutInflater.from(this).inflate(R.layout.dialog_create_note, null);
         builder.setView(viewInflated);//le paso la lista para que la embeba
 
-        final EditText input = (EditText) viewInflated.findViewById(R.id.editTextNewBoard);
-        input.setText(board.getTitle()); // cuando voy a editar muestra el texto de lo que quiero editar
+        final EditText input = (EditText) viewInflated.findViewById(R.id.editTextNewNote);
+        input.setText(note.getDescription()); // cuando voy a editar muestra el texto de lo que quiero editar
 
 
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //trim() es para borrar los espacios al final, por si el usuario los dejara
-                String boardName = input.getText().toString().trim();
-                if(boardName.length() == 0)
-                    Toast.makeText(getApplicationContext(), "The name is required to create a new Board", Toast.LENGTH_LONG).show();
-                else if(boardName.equals(board.getTitle()))
-                    Toast.makeText(getApplicationContext(), "The name is the same than is was before", Toast.LENGTH_LONG).show();
+                String noteDescription = input.getText().toString().trim();
+                if(noteDescription.length() == 0)
+                    Toast.makeText(getApplicationContext(), "The text for the note is required to be edited", Toast.LENGTH_LONG).show();
+                else if(noteDescription.equals(board.getTitle()))
+                    Toast.makeText(getApplicationContext(), "The note is the same than is was before", Toast.LENGTH_LONG).show();
                 else
-                  //  editBoard(boardName, board); //aqui edita
+                   editNote(noteDescription, note); //aqui edita
 
 
             }
@@ -222,7 +222,5 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
     }
 
     @Override
-    public void onChange(Board board) {
-
-    }
+    public void onChange(Board board) { adapter.notifyDataSetChanged();  }
 }
