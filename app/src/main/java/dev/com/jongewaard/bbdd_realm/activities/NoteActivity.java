@@ -100,7 +100,8 @@ public class NoteActivity extends AppCompatActivity implements RealmChangeListen
 
     private void deleteAll(){
         realm.beginTransaction();
-        realm.deleteAll();
+
+        board.getNotes().deleteFromRealm(boardId);
         realm.commitTransaction();
     }
 
