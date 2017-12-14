@@ -49,11 +49,6 @@ public class MyApplication extends Application {
     }
 
 
-
-
-
-
-
     //metodo que hago privado para utilizarlo solo aquí. Este metodo va a trabajar con clases
     // genericas, no sabemos cual es y a la T la extendemos a Realm
     private <T extends RealmObject> AtomicInteger getIdByTable(Realm realm, Class<T> anyClass){

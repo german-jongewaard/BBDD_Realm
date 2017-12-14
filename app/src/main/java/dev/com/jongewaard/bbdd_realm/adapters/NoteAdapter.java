@@ -20,7 +20,6 @@ import dev.com.jongewaard.bbdd_realm.models.Note;
 
 public class NoteAdapter extends BaseAdapter {
 
-
     private Context context;
     private List<Note> list;
     private int layout;

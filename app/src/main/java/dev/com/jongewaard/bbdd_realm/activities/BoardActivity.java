@@ -34,7 +34,6 @@ public class BoardActivity extends AppCompatActivity implements RealmChangeListe
     private BoardAdapter adapter;
     private RealmResults<Board> boards;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
